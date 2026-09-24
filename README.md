@@ -1,36 +1,51 @@
-    import random
-
-    option = ["rock","paper","scissors"]
-
-    play_again = True
-
-
-    while play_again:
-        
-    user_choice = input("\nYour choice: ").lower()  
-
-    if user_choice not in option:
-        print(" Invalid choice!   ,  please tray again.")
-        continue
-
-    computer_choice = random.choice(option)    
-    
-    print(f"You chose {user_choice},computer chose {computer_choice}")
+    from turtle import Screen, Turtle, tracer, done
+    from colorsys import hsv_to_rgb
+    from random import uniform
+    from time import sleep
 
 
-    if user_choice == computer_choice:
-       print(" It's a tie!")
-       play_again = True
+    def setup_screen():
+        screen = Screen()
+        screen.bgcolor("black")
+        screen.title("star spiral animation")
+        tracer(2)
+        return screen
 
 
-    elif (user_choice == "rock" and computer_choice == "scissors") or \
-        (user_choice == "paper" and computer_choice == "rock") or \
-        (user_choice == "scissors" and computer_choice == "paper"):
-        print(" You win!")
-        play_again = False
+    def create_turtle():
+        t = Turtle()
+        t.speed(0)
+        t.hideturtle()
+        return t
 
-        
-    else:
-        print("You Lose!")
-        play_again = False
 
+    def draw_spiral(t, steps=300, angle=147, hue_step=0.005):
+        hue = uniform(0, 1)  # random starting color each run
+        for i in range(steps):
+            color = hsv_to_rgb(hue, 1, 1)
+            t.pencolor(color)
+            t.forward(i * 3)
+            t.right(angle)
+            hue += hue_step
+
+
+    def write_title(t, text="PYTHONKING"):
+        t.up()
+        t.goto(0, -360)
+        t.color("white")
+        t.write(text, align="center", font=("Arial", 24, "bold"))
+
+
+    def main():
+        screen = setup_screen()
+        t = create_turtle()
+        draw_spiral(t)
+        screen.update()
+        sleep(1)  # short pause before the title appears
+        write_title(t)
+        screen.update()
+        done()
+
+
+if __name__ == "__main__":
+    main()
