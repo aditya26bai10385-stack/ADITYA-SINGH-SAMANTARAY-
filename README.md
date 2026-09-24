@@ -1,11 +1,11 @@
-import random
+    import random
 
-option = ["rock","paper","scissors"]
+    option = ["rock","paper","scissors"]
 
-play_again = True
+    play_again = True
 
 
-while play_again:
+    while play_again:
         
     user_choice = input("\nYour choice: ").lower()  
 
